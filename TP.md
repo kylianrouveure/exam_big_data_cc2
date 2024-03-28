@@ -3,30 +3,28 @@
 
 ## 3.1 - Prise en main Commandes HDFS
 
-<a href="parties/P3-1.md" >Voir la partie</a>
+<a href="TP-parties/P3-1.md" >Voir la partie</a>
 
 
 ## 3.2 - Importer et exporter des données
 
-<a href="parties/P3-2.md" >Voir la partie</a>
+<a href="TP-parties/P3-2.md" >Voir la partie</a>
 
 
 ## 3.3 - Manipulation des données dans HDFS
 
-<a href="parties/P3-3.md" >Voir la partie</a>
+<a href="TP-parties/P3-3.md" >Voir la partie</a>
 
 
 ## 3.4 - Manipulation de fichiers télécharger depuis un serveur
 
-<a href="parties/P3-4.md" >Voir la partie</a>
+<a href="TP-parties/P3-4.md" >Voir la partie</a>
 
 ## 3.5 - Fichiers de configuration HDFS
 
-<a href="parties/P3-5.md" >Voir la partie</a>
+<a href="TP-parties/P3-5.md" >Voir la partie</a>
 
 ## 4.1 - Préparation de la vm (MrJob, Python ...)
-
-<a href="parties/P4-1.md" >Voir la partie</a>
 
 yum et pip sont utilisés pour installer les packages nécessaires comme MrJob, Python, et Nano.
 
