@@ -180,13 +180,14 @@ The filesystem under path '/user' is HEALTHY
 wget https://files.grouplens.org/datasets/movielens/ml-1m.zip
 ```
 
-Il n'y a pas d'erreur qui s'est affiché
+wget sont utilisés pour télécharger des fichiers depuis internet
 
 3. **Décompressez le fichier zip**
 
 ```bash
 unzip ml-1m.zip
-```
+``` 
+unzip sont utilisés pour décompresser des fichiers.
 
 4. **Créez un répértoire /datasets/movies en local et sur hdfs**
 ```bash
@@ -199,6 +200,8 @@ hdfs dfs -mkdir -p data/datasets/movies/
 hdfs dfs -put ml-m1/ratings.dat data/datasets/movies/
 hdfs fsck data/datasets/movies/ratings.dat -files -blocks
 ```
+
+La commande hdfs fsck [chemin] -files -blocks montre comment un fichier est divisé en blocs sur HDFS.
 
 Résultat :
 ```bash
@@ -235,8 +238,9 @@ wget https://files.grouplens.org/datasets/movielens/ml-25m.zip
 ```bash
 unzip ml-25m.zip
 hdfs dfs -put ml-25m/ratings.csv data/datasets/movies-2/
-hdfs fsck  data/datasets/movies-2/ratings.csv -files -blocks
+hdfs fsck data/datasets/movies-2/ratings.csv -files -blocks
 ```
+La commande hdfs fsck [chemin] -files -blocks montre comment un fichier est divisé en blocs sur HDFS.
 
 Résultat :
 ```bash
@@ -275,6 +279,8 @@ FSCK ended at Wed Mar 27 12:42:16 UTC 2024 in 2 milliseconds
 hdfs getconf -confkey dfs.replication
 ```
 
+Le paramètre dfs.replication contrôle le nombre de réplicas d'un bloc dans HDFS.
+
 Résultat :
 ```bash
 1
@@ -289,6 +295,8 @@ HDFS stocke des fichiers en les décomposant en blocs de données, et la taille 
 ```bash
 hdfs getconf -confKey dfs.blocksize
 ```
+
+Le paramètre dfs.blocksize contrôle la taille des blocs dans HDFS.
 
 Résultat :
 ```bash
@@ -333,6 +341,8 @@ FSCK ended at Wed Mar 27 12:46:15 UTC 2024 in 1 milliseconds
 
 ## 4.1 - Préparation de la vm (MrJob, Python ...)
 
+yum et pip sont utilisés pour installer les packages nécessaires comme MrJob, Python, et Nano.
+
 1. **Mise à jour de la SandBox HDP**
 
 ```bash
@@ -346,8 +356,6 @@ sudo yum install https://repo.ius.io/ius-release-el7.rpm https://dl.fedoraprojec
 sudo yum install python-pip
 ```
 
-
--- On est la
 3. **Installation de MrJob**
 
 ```bash
@@ -362,8 +370,9 @@ sudo pip install PyYAML==5.4.1
 sudo yum install nano
 ```
 
-
 ## 4.2 - Execution du MapReduce en local
+
+Le script filmEvaluation.py est exécuté en local puis sur Hadoop pour analyser un fichier de données (evaluation.data). Les résultats montrent le nombre d'évaluations par note (de 1 à 5), démontrant la capacité de MapReduce à traiter et agréger de grandes quantités de données distribuées.
 
 1. **Récuperation du code**
 
@@ -374,10 +383,85 @@ wget https://github.com/juba-agoun/iut-hadoop/raw/main/evaluation.data
 sudo python filmEvaluation.py evaluation.data
 ```
 
-
 ## 4.3 - Execution du MapReduce en local
 
 ```bash
-sudo python filmEvaluation.py -r hadoop --hadoop-streaming-jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar hdfs:///user/maria_dev/data/datasets/eval.data
+sudo python filmEvaluation.py -r hadoop --hadoop-streaming-jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar evaluation.data
 ```
 
+Résultat
+```bash
+  Running job: job_1711618069906_0001
+  Job job_1711618069906_0001 running in uber mode : false
+   map 0% reduce 0%
+   map 50% reduce 0%
+   map 100% reduce 0%
+   map 100% reduce 100%
+  Job job_1711618069906_0001 completed successfully
+  Output directory: hdfs:///user/root/tmp/mrjob/filmEvaluation.root.20240328.094507.163552/output
+Counters: 49
+        File Input Format Counters
+                Bytes Read=2038189
+        File Output Format Counters
+                Bytes Written=49
+        File System Counters
+                FILE: Number of bytes read=800030
+                FILE: Number of bytes written=2072559
+                FILE: Number of large read operations=0
+                FILE: Number of read operations=0
+                FILE: Number of write operations=0
+                HDFS: Number of bytes read=2038541
+                HDFS: Number of bytes written=49
+                HDFS: Number of large read operations=0
+                HDFS: Number of read operations=9
+                HDFS: Number of write operations=2
+        Job Counters
+                Data-local map tasks=2
+                Launched map tasks=2
+                Launched reduce tasks=1
+                Total megabyte-milliseconds taken by all map tasks=4211750
+                Total megabyte-milliseconds taken by all reduce tasks=1029500
+                Total time spent by all map tasks (ms)=16847
+                Total time spent by all maps in occupied slots (ms)=16847
+                Total time spent by all reduce tasks (ms)=4118
+                Total time spent by all reduces in occupied slots (ms)=4118
+                Total vcore-milliseconds taken by all map tasks=16847
+                Total vcore-milliseconds taken by all reduce tasks=4118
+        Map-Reduce Framework
+                CPU time spent (ms)=4160
+                Combine input records=0
+                Combine output records=0
+                Failed Shuffles=0
+                GC time elapsed (ms)=637
+                Input split bytes=352
+                Map input records=100003
+                Map output bytes=600018
+                Map output materialized bytes=800036
+                Map output records=100003
+                Merged Map outputs=2
+                Physical memory (bytes) snapshot=552550400
+                Reduce input groups=5
+                Reduce input records=100003
+                Reduce output records=5
+                Reduce shuffle bytes=800036
+                Shuffled Maps =2
+                Spilled Records=200006
+                Total committed heap usage (bytes)=272105472
+                Virtual memory (bytes) snapshot=5840056320
+        Shuffle Errors
+                BAD_ID=0
+                CONNECTION=0
+                IO_ERROR=0
+                WRONG_LENGTH=0
+                WRONG_MAP=0
+                WRONG_REDUCE=0
+job output is in hdfs:///user/root/tmp/mrjob/filmEvaluation.root.20240328.094507.163552/output
+Streaming final output from hdfs:///user/root/tmp/mrjob/filmEvaluation.root.20240328.094507.163552/output...
+"1"     6111
+"2"     11370
+"3"     27145
+"4"     34174
+"5"     21203
+Removing HDFS temp directory hdfs:///user/root/tmp/mrjob/filmEvaluation.root.20240328.094507.163552...
+Removing temp directory /tmp/filmEvaluation.root.20240328.094507.163552...
+```
