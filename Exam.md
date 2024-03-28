@@ -8,6 +8,7 @@
 ```bash
 hdfs dfs -put ml-25m/tags.csv data/datasets/movies-2/ //
 hdfs fsck ml-25m/tags.csv -files -blocks
+python tags_par_film.py -r hadoop --hadoop-streaming-jar /chemin/vers/hadoop-streaming.jar hdfs:///data/datasets/movies-2/tags.csv -o hdfs:///chemin/sortie/tags_par_film
 ```
 
 Résultats :
