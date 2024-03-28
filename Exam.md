@@ -17,7 +17,7 @@ sudo python tags_par_film.py -r hadoop --hadoop-streaming-jar /usr/hdp/current/h
 ```
 
 Résultats :
-<a href="Exam-resultats/R5.1.md" >click here</a>
+<a href="Exam-resultats/R5-1.md" >click here</a>
 
 2. **Trouvez combien de tags chaque utilisateur a ajoutés ?**
 
@@ -31,7 +31,7 @@ sudo python tags_par_utilisateur.py -r hadoop --hadoop-streaming-jar /usr/hdp/cu
 ```
 
 Résultats :
-<a href="Exam-resultats/R5.2.md" >click here</a>
+<a href="Exam-resultats/R5-2.md" >click here</a>
 
 3. **Combien de blocs occupe le fichier dans HDFS dans chacune des configurations ?**
 
@@ -58,4 +58,4 @@ sudo python tags_uniques_par_films.py -r hadoop --hadoop-streaming-jar /usr/hdp/
 ```
 
 Résultats :
-<a href="Exam-resultats/R5.4.md" >click here</a>
+<a href="Exam-resultats/R5-4.md" >click here</a>
